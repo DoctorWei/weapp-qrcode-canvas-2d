@@ -1,0 +1,3 @@
+build/*.js
+src/qrcode.js
+src/index.js
