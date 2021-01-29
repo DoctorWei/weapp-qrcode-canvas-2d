@@ -15,7 +15,7 @@
 ```
 
 ### 安装方法1：直接引入 js 文件
-直接引入 js 文件，使用 `drawQrcode()` 绘制二维码。
+直接引入 js 文件，使用 `drawQrcode()` 绘制二维码
 
 ```js
 // 将 dist 目录下，weapp.qrcode.esm.js 复制到项目中。路径根据实际引用的页面路径自行改变
@@ -36,7 +36,7 @@ npm install weapp-qrcode-canvas-2d --save
 ```js
 import drawQrcode from 'weapp-qrcode-canvas-2d'
 ```
-## 安装完成后调用
+### 安装完成后调用
 
 ```js
 const query = wx.createSelectorQuery()
@@ -93,7 +93,8 @@ Type: Object
 | canvas | 必须 | 画布标识，传入 canvas 组件实例 |  |
 | canvasId | 非 | 绘制的`canvasId` | `'myQrcode'` |
 | width | 必须 | 二维码宽度，与`canvas`的`width`保持一致 | 260 |
-| padding | 非 | 空白边距 | 20 |
+| padding | 非 | 空白内边距 | 20 |
+| paddingColor | 非 | 内边距颜色 | 默认与background一致 |
 | text | 必须 | 二维码内容 | 'https://github.com/DoctorWei/weapp-qrcode-canvas-2d' |
 | typeNumber | 非| 二维码的计算模式，默认值-1 | 8 |
 | correctLevel | 非| 二维码纠错级别，默认值为高级，取值：`{ L: 1, M: 0, Q: 3, H: 2 }` | 1 |

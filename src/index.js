@@ -25,7 +25,7 @@ function utf16to8(str) {
   return out
 }
 
-function drawQrcode(options) {
+function drawQrcode(options, debug) {
   options = options || {}
   options = extend(true, {
     canvasId: 'myQrcode',
@@ -34,6 +34,7 @@ function drawQrcode(options) {
     width: 260,
     height: 260,
     padding: 20,
+    // paddingColor: '#ffffff', // 默认与background一致
     typeNumber: -1,
     correctLevel: QRErrorCorrectLevel.H,
     background: '#ffffff',
@@ -52,10 +53,16 @@ function drawQrcode(options) {
     return
   }
 
-  createCanvas()
-  var qrcode = new QRCode(options.typeNumber, options.correctLevel)
-  qrcode.addData(utf16to8(options.text))
-  qrcode.make()
+  if (!options.paddingColor) options.paddingColor = options.background
+
+  if (debug) {
+    var qrcode = new QRCode(options.typeNumber, options.correctLevel)
+    qrcode.addData(utf16to8(options.text))
+    qrcode.make()
+    return qrcode
+  } else {
+    createCanvas()
+  }
 
   function createCanvas() {
     // create the qrcode itself
@@ -71,7 +78,7 @@ function drawQrcode(options) {
     const width = canvas.width
 
     // 背景色
-    ctx.fillStyle = options.background
+    ctx.fillStyle = options.paddingColor
     ctx.fillRect(0, 0, width + options.padding * 2, width + options.padding * 2);
     ctx.stroke();
 
@@ -81,17 +88,13 @@ function drawQrcode(options) {
     // 开始画二维码
     for (var row = 0; row < qrcode.getModuleCount(); row++) {
       for (var col = 0; col < qrcode.getModuleCount(); col++) {
-        if (qrcode.isDark(row, col)) {
-          ctx.fillStyle = options.foreground
-          var w = (Math.ceil((col + 1) * tileW) - Math.floor(col * tileW))
-          var h = (Math.ceil((row + 1) * tileW) - Math.floor(row * tileW))
-          ctx.fillRect(Math.round(col * tileW) + options.padding, Math.round(row * tileH) + options.padding, w, h);
-        }
+        ctx.fillStyle = qrcode.isDark(row, col) ? options.foreground : options.background
+        var w = (Math.ceil((col + 1) * tileW) - Math.floor(col * tileW))
+        var h = (Math.ceil((row + 1) * tileW) - Math.floor(row * tileW))
+        ctx.fillRect(Math.round(col * tileW) + options.padding, Math.round(row * tileH) + options.padding, w, h);
       }
     }
     ctx.stroke();
-
-
   }
 }
 
