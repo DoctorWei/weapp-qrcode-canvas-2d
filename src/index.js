@@ -41,10 +41,8 @@ function drawQrcode(options, debug) {
     foreground: '#000000',
     image: {
       imageResource: '',
-      dx: 0,
-      dy: 0,
-      dWidth: 100,
-      dHeight: 100
+      width: 50,
+      height: 50
     }
   }, options)
 
@@ -59,9 +57,17 @@ function drawQrcode(options, debug) {
     var qrcode = new QRCode(options.typeNumber, options.correctLevel)
     qrcode.addData(utf16to8(options.text))
     qrcode.make()
-    return qrcode
+
+    return new Promise(function (resolve, reject) {
+      resolve(qrcode);
+    })
+
   } else {
-    createCanvas()
+
+    return new Promise(function (resolve, reject) {
+      return resolve(createCanvas());
+    })
+
   }
 
   function createCanvas() {
@@ -80,7 +86,6 @@ function drawQrcode(options, debug) {
     // 背景色
     ctx.fillStyle = options.paddingColor
     ctx.fillRect(0, 0, width + options.padding * 2, width + options.padding * 2);
-    ctx.stroke();
 
     var tileW = (width - options.padding * 2) / qrcode.getModuleCount()
     var tileH = (width - options.padding * 2) / qrcode.getModuleCount()
@@ -94,7 +99,13 @@ function drawQrcode(options, debug) {
         ctx.fillRect(Math.round(col * tileW) + options.padding, Math.round(row * tileH) + options.padding, w, h);
       }
     }
-    ctx.stroke();
+
+    if (options.image.imageResource) {
+      var dx = (width - options.image.width * dpr) / 2
+      var dy = (width - options.image.height * dpr) / 2
+      ctx.drawImage(options.image.imageResource, dx, dy, options.image.width * dpr, options.image.height * dpr)
+    }
+    return ctx
   }
 }
 

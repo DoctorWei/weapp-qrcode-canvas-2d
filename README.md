@@ -38,6 +38,7 @@ import drawQrcode from 'weapp-qrcode-canvas-2d'
 ```
 ### 安装完成后调用
 
+#### 例子1：没有使用叠加图片的用法
 ```js
 const query = wx.createSelectorQuery()
 query.select('#myQrcode')
@@ -79,6 +80,63 @@ query.select('#myQrcode')
     })
 ```
 
+#### 例子2：使用叠加图片的用法(可在二维码中间加logo图片)
+```js
+const query = wx.createSelectorQuery()
+
+query.select('#myQrcode')
+    .fields({
+        node: true,
+        size: true
+    })
+    .exec(async (res) => {
+        var canvas = res[0].node
+
+        var img = canvas.createImage();
+        img.src = "/image/logo.png"
+
+        img.onload = function () {
+            // img.onload完成后才能调用 drawQrcode方法
+
+            var options = {
+                canvas: canvas,
+                canvasId: 'myQrcode',
+                width: 260,
+                padding: 30,
+                paddingColor: '#fff',
+                background: '#fff',
+                foreground: '#000000',
+                text: qrcodeText,
+                image: {
+                    imageResource: img,
+                    width: 50, // 建议不要设置过大，以免影响扫码
+                    height: 50 // 建议不要设置过大，以免影响扫码
+                }
+            }
+
+            drawQrcode(options)
+
+            // 获取临时路径（得到之后，想干嘛就干嘛了）
+            wx.canvasToTempFilePath({
+                x: 0,
+                y: 0,
+                width: 260,
+                height: 260,
+                destWidth: 600,
+                destHeight: 600,
+                canvasId: 'myQrcode',
+                canvas: canvas,
+                success(res) {
+                    console.log('二维码临时路径为：', res.tempFilePath)
+                },
+                fail(res) {
+                    console.error(res)
+                }
+            })
+
+        };
+    })
+```
 
 ## API
 
@@ -92,15 +150,15 @@ Type: Object
 | ------ | ------ | ------ | ------ |
 | canvas | 必须 | 画布标识，传入 canvas 组件实例 |  |
 | canvasId | 非 | 绘制的`canvasId` | `'myQrcode'` |
-| width | 必须 | 二维码宽度，与`canvas`的`width`保持一致 | 260 |
+| text | 必须 | 二维码内容 | 'https://github.com/DoctorWei/weapp-qrcode-canvas-2d' |
+| width | 非 | 二维码宽度，与`canvas`的`width`保持一致 | 260 |
 | padding | 非 | 空白内边距 | 20 |
 | paddingColor | 非 | 内边距颜色 | 默认与background一致 |
-| text | 必须 | 二维码内容 | 'https://github.com/DoctorWei/weapp-qrcode-canvas-2d' |
-| typeNumber | 非| 二维码的计算模式，默认值-1 | 8 |
-| correctLevel | 非| 二维码纠错级别，默认值为高级，取值：`{ L: 1, M: 0, Q: 3, H: 2 }` | 1 |
 | background | 非 | 二维码背景颜色，默认值白色 | `'#ffffff'` |
 | foreground | 非 | 二维码前景色，默认值黑色 | `'#000000'` |
-
+| typeNumber | 非| 二维码的计算模式，默认值-1 | 8 |
+| correctLevel | 非| 二维码纠错级别，默认值为高级，取值：`{ L: 1, M: 0, Q: 3, H: 2 }` | 1 |
+| image | 非 | 在 canvas 上绘制图片，层级高于二维码，v1.1.0+版本支持。具体使用见：下方例子2 | `{imageResource: '', width:50, height: 50}` |
 ## TIPS
 
 weapp-qrcode-canvas-2d 参考以下源码
