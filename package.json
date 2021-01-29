@@ -1,6 +1,6 @@
 {
   "name": "weapp-qrcode-canvas-2d",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "bundleDependencies": false,
   "dependencies": {
     "extend": "^3.0.2"
