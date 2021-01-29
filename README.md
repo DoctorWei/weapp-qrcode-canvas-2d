@@ -2,11 +2,16 @@
 
  [weapp-qrcode-canvas-2d](https://github.com/DoctorWei/weapp-qrcode-canvas-2d) 是一个在微信小程序中，使用新版canvas-2d接口，快速生成二维码的js包。canvas 2d 接口支持同层渲染且性能更佳，可大幅提升生成图片的速度。
 
-### 测试环境：
+
+# 仓库地址
+-  [weapp-qrcode-canvas-2d【码云gitee】](https://gitee.com/w386888618/weapp-qrcode-canvas-2d)
+-  [weapp-qrcode-canvas-2d【github】](https://github.com/DoctorWei/weapp-qrcode-canvas-2d)
+
+# 测试环境
 - 微信小程序基础库版本：2.10.4
 - 开发者工具版本：Stable 1.03.2101150
 
-## Usage
+# Usage
 
 先在 wxml 文件中，创建绘制的 `canvas`，并定义好 `width`, `height`, `id` , `type` ，其中type的值必须为`2d`
 
@@ -14,7 +19,7 @@
 <canvas type="2d" style="width: 260px; height: 260px;" id="myQrcode"></canvas>
 ```
 
-### 安装方法1：直接引入 js 文件
+## 安装方法1：直接引入 js 文件
 直接引入 js 文件，使用 `drawQrcode()` 绘制二维码
 
 ```js
@@ -23,22 +28,20 @@
 import drawQrcode from '../../utils/weapp.qrcode.esm.js'
 ```
 
-### 安装方法2：npm安装
-
+## 安装方法2：npm安装
 
 ```
 npm install weapp-qrcode-canvas-2d --save
-
-// 然后需要在小程序开发者工具中：构建npm
 ```
-
+// 然后需要在小程序开发者工具中：构建npm
 
 ```js
 import drawQrcode from 'weapp-qrcode-canvas-2d'
 ```
-### 安装完成后调用
 
-#### 例子1：没有使用叠加图片的用法
+## 安装完成后调用
+
+### 例子1：没有使用叠加图片
 ```js
 const query = wx.createSelectorQuery()
 query.select('#myQrcode')
@@ -80,7 +83,7 @@ query.select('#myQrcode')
     })
 ```
 
-#### 例子2：使用叠加图片的用法(可在二维码中间加logo图片)
+### 例子2：使用叠加图片(在二维码中加logo)
 ```js
 const query = wx.createSelectorQuery()
 
@@ -138,11 +141,10 @@ query.select('#myQrcode')
     })
 ```
 
-## API
 
-### drawQrcode([options])
-
-#### options
+# API
+## drawQrcode([options])
+### options
 
 Type: Object
 
@@ -159,7 +161,7 @@ Type: Object
 | typeNumber | 非| 二维码的计算模式，默认值-1 | 8 |
 | correctLevel | 非| 二维码纠错级别，默认值为高级，取值：`{ L: 1, M: 0, Q: 3, H: 2 }` | 1 |
 | image | 非 | 在 canvas 上绘制图片，层级高于二维码，v1.1.0+版本支持。具体使用见：下方例子2 | `{imageResource: '', width:50, height: 50}` |
-## TIPS
+# TIPS
 
 weapp-qrcode-canvas-2d 参考以下源码
 
