@@ -41,8 +41,9 @@ function drawQrcode(options, debug) {
     foreground: '#000000',
     image: {
       imageResource: '',
-      width: 50,
-      height: 50
+      width: 80,
+      height: 80,
+      round: true
     }
   }, options)
 
@@ -101,10 +102,38 @@ function drawQrcode(options, debug) {
     }
 
     if (options.image.imageResource) {
-      var dx = (width - options.image.width * dpr) / 2
-      var dy = (width - options.image.height * dpr) / 2
-      ctx.drawImage(options.image.imageResource, dx, dy, options.image.width * dpr, options.image.height * dpr)
+      const imgW = options.image.width * dpr
+      const imgH = options.image.height * dpr
+      const dx = (width - imgW) / 2
+      const dy = (width - imgH) / 2
+      if (options.image.round) {
+        // Logo边框
+        const imgW2 = options.image.width * dpr + 30
+        const dx2 = (width - imgW2) / 2
+        const r2 = imgW2 / 2
+        const cx2 = dx2 + r2;
+        ctx.beginPath();
+        ctx.arc(cx2, cx2, r2, 0, 2 * Math.PI);
+        ctx.fillStyle = '#ffffff'
+        ctx.fill();
+        ctx.restore();
+
+        // 画Logo
+        const r = imgW / 2
+        const cx = dx + r;
+        const cy = dy + r;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, 2 * Math.PI);
+        ctx.clip();
+
+        ctx.drawImage(options.image.imageResource, dx, dy, imgW, imgW);
+        ctx.restore();
+      } else {
+        ctx.drawImage(options.image.imageResource, dx, dy, imgW, imgH)
+        ctx.restore();
+      }
     }
+
     return ctx
   }
 }
