@@ -1,6 +1,6 @@
 # weapp-qrcode-canvas-2d
 
- [weapp-qrcode-canvas-2d](https://github.com/DoctorWei/weapp-qrcode-canvas-2d) 是使用新版canvas-2d接口在微信小程序中生成二维码（外部二维码）的js包。canvas 2d 接口支持同层渲染且性能更佳，可大幅提升生成图片的速度。
+ [weapp-qrcode-canvas-2d](https://github.com/DoctorWei/weapp-qrcode-canvas-2d) 是使用新版canvas-2d接口在微信小程序中生成二维码（外部二维码）的js包。canvas 2d 接口支持同层渲染且性能更佳，建议切换使用，可大幅提升速度。
 
 # 仓库地址
 -  [weapp-qrcode-canvas-2d【码云gitee】](https://gitee.com/w386888618/weapp-qrcode-canvas-2d)
@@ -110,7 +110,7 @@ query.select('#myQrcode')
                 paddingColor: '#fff',
                 background: '#fff',
                 foreground: '#000000',
-                text: qrcodeText,
+                text: 'https://gitee.com/w386888618/weapp-qrcode-canvas-2d',
                 image: {
                     imageResource: img,
                     width: 80, // 建议不要设置过大，以免影响扫码
@@ -162,7 +162,7 @@ Type: Object
 | foreground | 非 | 二维码前景色，默认值黑色 | `'#000000'` |
 | typeNumber | 非| 二维码的计算模式，默认值-1 | 8 |
 | correctLevel | 非| 二维码纠错级别，默认值为高级，取值：`{ L: 1, M: 0, Q: 3, H: 2 }` | 1 |
-| image | 非 | 在 canvas 上绘制图片，层级高于二维码，v1.1.1+版本支持。具体使用见：下方例子2 | `{imageResource: '', width:80, height: 80, round: true}` |
+| image | 非 | 在 canvas 上绘制图片，层级高于二维码，v1.1.1+版本支持。具体使用见：例子2 | `{imageResource: '', width:80, height: 80, round: true}` |
 # TIPS
 
 weapp-qrcode-canvas-2d 参考以下源码
