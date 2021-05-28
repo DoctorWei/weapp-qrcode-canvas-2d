@@ -3,7 +3,7 @@
  [weapp-qrcode-canvas-2d](https://github.com/DoctorWei/weapp-qrcode-canvas-2d) 是使用新版canvas-2d接口在微信小程序中生成二维码（外部二维码）的js包。canvas 2d 接口支持同层渲染且性能更佳，建议切换使用，可大幅提升速度。
 
 # 仓库地址
--  [weapp-qrcode-canvas-2d【码云gitee】](https://gitee.com/w386888618/weapp-qrcode-canvas-2d)
+-  [weapp-qrcode-canvas-2d【码云gitee】](https://gitee.com/WeiDoctor/weapp-qrcode-canvas-2d)
 -  [weapp-qrcode-canvas-2d【github】](https://github.com/DoctorWei/weapp-qrcode-canvas-2d)
 
 <!-- ![weapp-qrcode-canvas-2d](https://wx4.sinaimg.cn/mw690/77d4598fly1gn4nqmgayzj205k05kgli.jpg) -->
