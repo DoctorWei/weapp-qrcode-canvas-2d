@@ -93,7 +93,7 @@ query.select('#myQrcode')
         node: true,
         size: true
     })
-    .exec(async (res) => {
+    .exec((res) => {
         var canvas = res[0].node
 
         var img = canvas.createImage();
@@ -110,11 +110,11 @@ query.select('#myQrcode')
                 paddingColor: '#fff',
                 background: '#fff',
                 foreground: '#000000',
-                text: 'https://gitee.com/w386888618/weapp-qrcode-canvas-2d',
+                text: 'abc123',
                 image: {
                     imageResource: img,
                     width: 80, // 建议不要设置过大，以免影响扫码
-                    height: 80 // 建议不要设置过大，以免影响扫码
+                    height: 80, // 建议不要设置过大，以免影响扫码
                     round: true // Logo图片是否为圆形
                 }
             }
@@ -154,7 +154,7 @@ Type: Object
 | ------ | ------ | ------ | ------ |
 | canvas | 必须 | 画布标识，传入 canvas 组件实例 |  |
 | canvasId | 非 | 绘制的`canvasId` | `'myQrcode'` |
-| text | 必须 | 二维码内容 | 'https://github.com/DoctorWei/weapp-qrcode-canvas-2d' |
+| text | 必须 | 二维码内容 | 'abc123' |
 | width | 非 | 二维码宽度，与`canvas`的`width`保持一致 | 260 |
 | padding | 非 | 空白内边距 | 20 |
 | paddingColor | 非 | 内边距颜色 | 默认与background一致 |
