@@ -40,10 +40,18 @@ module.exports = {
     uglify({
       compress: {
         // 'drop_console': true
-      }  
+      },
+      output: {
+        comments: function (node, comment) {
+          // 保留所有包含 #if 或 #endif 的注解
+          var text = comment.value;
+          if (/\#if/.test(text) || /\#endif/.test(text)) return true;
+          // 根据需要添加更多条件来保留其他类型的注解
+        }
+      },
     }),
     license({
-      banner: 'weapp.qrcode.js v' + pkg.version + ' (' + pkg.homepage + ')'
+      banner: 'weapp.qrcode.js v' + pkg.version
     })
   ]
 }

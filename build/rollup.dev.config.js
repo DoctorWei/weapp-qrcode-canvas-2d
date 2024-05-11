@@ -33,7 +33,7 @@ module.exports = {
       exclude: 'node_modules/**'
     }),
     license({
-      banner: 'weapp.qrcode.js v' + pkg.version + ' (' + pkg.homepage + ')'
+      banner: 'weapp.qrcode.js v' + pkg.version
     })
   ]
 }
