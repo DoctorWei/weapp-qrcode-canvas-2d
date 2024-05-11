@@ -77,7 +77,11 @@ function drawQrcode(options, debug) {
     qrcode.addData(utf16to8(options.text))
     qrcode.make()
 
-    const dpr = wx.getSystemInfoSync().pixelRatio
+    var dpr = 1
+    // #ifdef MP-WEIXIN
+    dpr = wx.getSystemInfoSync().pixelRatio
+    // #endif
+
     var canvas = options.canvas
     const ctx = canvas.getContext('2d')
     canvas.width = options.width * dpr
