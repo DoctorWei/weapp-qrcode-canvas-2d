@@ -1,7 +1,7 @@
 {
   "name": "weapp-qrcode-canvas-2d",
   "version": "1.1.4",
-  "bundleDependencies": false,
+  "bundleDependencies": [],
   "deprecated": false,
   "description": "generate qrcode in wx",
   "devDependencies": {
@@ -38,5 +38,8 @@
     "dev": "rollup --config build/rollup.dev.config.js -w",
     "publish": "rollup --config build/rollup.dev.config.js & npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "extend": "^3.0.2"
   }
 }
