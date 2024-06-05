@@ -1,5 +1,5 @@
 /**
- * weapp.qrcode.js v1.1.4
+ * weapp.qrcode.js v1.1.5
  */
 
 (function (global, factory) {
