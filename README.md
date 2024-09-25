@@ -50,21 +50,24 @@ query.select('#myQrcode')
         node: true,
         size: true
     })
-    .exec((res) => {
+    .exec(async (res) => {
         var canvas = res[0].node
 
         // 调用方法drawQrcode生成二维码
-        drawQrcode({
+        await drawQrcode({
             canvas: canvas,
             canvasId: 'myQrcode',
             width: 260,
             padding: 30,
             background: '#ffffff',
             foreground: '#000000',
-            text: '大王顶真帅',
+            text: '你好呀',
         })
 
-        // 获取临时路径（得到之后，想干嘛就干嘛了）
+        // let base64 = canvas.toDataURL()
+        // console.info(base64)
+
+        // 获取临时路径
         wx.canvasToTempFilePath({
             canvasId: 'myQrcode',
             canvas: canvas,
@@ -93,7 +96,7 @@ query.select('#myQrcode')
         node: true,
         size: true
     })
-    .exec((res) => {
+    .exec(async (res) => {
         var canvas = res[0].node
 
         var img = canvas.createImage();
@@ -119,9 +122,11 @@ query.select('#myQrcode')
                 }
             }
 
-            drawQrcode(options)
+           await drawQrcode(options)
+           // let base64 = canvas.toDataURL()
+           // console.info(base64)
 
-            // 获取临时路径（得到之后，想干嘛就干嘛了）
+           // 获取临时路径
             wx.canvasToTempFilePath({
                 x: 0,
                 y: 0,
