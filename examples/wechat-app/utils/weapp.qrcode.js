@@ -1,5 +1,5 @@
 /**
- * weapp.qrcode.js v1.1.5
+ * weapp.qrcode.js v1.1.6
  */
 
 (function (global, factory) {
@@ -1215,7 +1215,7 @@ function drawQrcode(options, debug) {
   options = extend(true, {
     canvasId: 'myQrcode',
     // canvas: canvas,
-    text: '爱一个人就要勇敢说出来',
+    text: '测试文本',
     width: 260,
     height: 260,
     padding: 20,
@@ -1266,7 +1266,20 @@ function drawQrcode(options, debug) {
     // #endif
 
     var canvas = options.canvas;
-    const ctx = canvas.getContext('2d');
+    var ctx;
+
+    try {
+      if (canvas.getContext) {
+        ctx = canvas.getContext('2d');
+      } else {
+        // #ifdef H5
+        ctx = uni.createCanvasContext(options.canvasId);
+        // #endif
+      }
+    } catch (error) {
+      ctx = canvas.getContext('2d');
+    }
+
     canvas.width = options.width * dpr;
     canvas.height = options.width * dpr;
     const width = canvas.width;
@@ -1321,6 +1334,7 @@ function drawQrcode(options, debug) {
       }
     }
 
+    if (ctx.draw) ctx.draw();
     return ctx;
   }
 }

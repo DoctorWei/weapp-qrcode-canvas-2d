@@ -17,7 +17,20 @@
 先在 wxml 文件中，创建绘制的 `canvas`，并定义好 `width`, `height`, `id` , `type` ，其中type的值必须为`2d`
 
 ```html
+<!-- 微信小程序 -->
 <canvas type="2d" style="width: 260px; height: 260px;" id="myQrcode"></canvas>
+```
+
+```html
+<!-- uni-app -->
+
+<!-- #ifdef H5 -->
+<canvas canvas-id="myQrcode" style="width: 260px; height: 260px;"></canvas>
+<!-- #endif -->
+
+<!-- #ifndef H5 -->
+<canvas type="2d" id="myQrcode" style="width: 260px; height: 260px;"></canvas>
+<!-- #endif -->
 ```
 
 ## 安装方法1：直接引入 js 文件
@@ -51,7 +64,16 @@ query.select('#myQrcode')
         size: true
     })
     .exec(async (res) => {
+        // 微信小程序
         var canvas = res[0].node
+
+        // uni-app
+        // // #ifdef H5
+        // var canvas = res[0]
+        // // #endif
+        // // #ifndef H5
+        // var canvas = res[0].node
+        // // #endif
 
         // 调用方法drawQrcode生成二维码
         await drawQrcode({
@@ -97,7 +119,16 @@ query.select('#myQrcode')
         size: true
     })
     .exec(async (res) => {
+        // 微信小程序
         var canvas = res[0].node
+
+        // uni-app
+        // // #ifdef H5
+        // var canvas = res[0]
+        // // #endif
+        // // #ifndef H5
+        // var canvas = res[0].node
+        // // #endif
 
         var img = canvas.createImage();
         img.src = "/image/logo.png"
